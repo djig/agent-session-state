@@ -22,7 +22,7 @@ Every agent UI library owns one slice of session state; none of them owns the wh
 - assistant-ui: "pending tool approval is lost on reload" — https://github.com/assistant-ui/assistant-ui/issues/8560 (Sep 29 2026).
 - LangGraph's frontend HITL docs ship no approval component; you render `stream.interrupt` yourself and own its persistence — https://langchain-ai.github.io/langgraph/cloud/how-tos/use_stream_react/
 - AI SDK resumable streams require Redis + `resumable-stream` + two endpoints + a stop endpoint you write — https://ai-sdk.dev/docs/ai-sdk-ui/chatbot-resume-streams — and https://github.com/vercel/ai/issues/11865 reports resume failing when the tab is backgrounded.
-- Ably's write-up on the same gap (ably.com blog, "AI chat state / streaming" series): "when the component unmounts… the history is gone".
+- Ably's write-up on the same gap (https://ably.com/vercel/vercel-why-ai-chat-history-disappears-between-sessions): "when the component unmounts… the history is gone".
 
 This library is the missing layer: an append-only event log with a pure reducer, persisted through a pluggable adapter, that replays into a complete `SessionState` on load. Approvals are **state in the log**, not component state. So are stream cursors, subagent trees, token usage, and the "I resolved this approval but the network was down" outbox.
 
