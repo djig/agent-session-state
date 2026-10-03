@@ -5,10 +5,10 @@
 import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport } from 'ai';
 import { useEffect, useMemo, useState } from 'react';
-import { createSessionStore } from '@djig/agent-session-state';
-import { localStorageStorage } from '@djig/agent-session-state/storage/local-storage';
-import { syncUIMessages, toToolApprovalResponse } from '@djig/agent-session-state/adapters/ai-sdk';
-import { useAgentSession, useOutbox, usePendingApprovals, useUsage } from '@djig/agent-session-state/react';
+import { createSessionStore } from '@djignesh21/agent-session-state';
+import { localStorageStorage } from '@djignesh21/agent-session-state/storage/local-storage';
+import { syncUIMessages, toToolApprovalResponse } from '@djignesh21/agent-session-state/adapters/ai-sdk';
+import { useAgentSession, useOutbox, usePendingApprovals, useUsage } from '@djignesh21/agent-session-state/react';
 
 const CHAT_ID = 'demo-chat'; // in a real app: route param / server-issued id
 

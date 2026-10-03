@@ -1,5 +1,5 @@
 {
-  "name": "@djig/agent-session-state",
+  "name": "@djignesh21/agent-session-state",
   "version": "0.1.0",
   "description": "Durable, runtime-agnostic agent session state for React: pending approvals that survive reload, resumable stream cursors, subagent trees, and token/cost accounting — one event log, any transport.",
   "author": "Jignesh (https://djig.github.io)",
@@ -13,6 +13,9 @@
   "homepage": "https://github.com/djig/agent-session-state#readme",
   "bugs": {
     "url": "https://github.com/djig/agent-session-state/issues"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "keywords": [
     "agent",

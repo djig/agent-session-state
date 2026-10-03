@@ -1,11 +1,11 @@
-# @djig/agent-session-state
+# @djignesh21/agent-session-state
 
 **Durable, runtime-agnostic agent session state for React: pending approvals that survive reload, resumable stream cursors, subagent trees, and token/cost accounting — one event log, any transport.**
 
 Headless. No UI components. Works with Vercel AI SDK `useChat` message parts, AG-UI event streams, LangGraph-style interrupts, or a hand-rolled SSE feed. It sits *under* assistant-ui / AI Elements / CopilotKit components, not instead of them.
 
 ```
-npm i @djig/agent-session-state
+npm i @djignesh21/agent-session-state
 ```
 
 - Core: **~6.3 KB gzipped**, zero dependencies, ESM + CJS, strict TypeScript.
@@ -52,10 +52,10 @@ This library is the missing layer: an append-only event log with a pure reducer,
 'use client';
 import { useChat } from '@ai-sdk/react';
 import { useEffect, useMemo } from 'react';
-import { createSessionStore } from '@djig/agent-session-state';
-import { localStorageStorage } from '@djig/agent-session-state/storage/local-storage';
-import { syncUIMessages, toToolApprovalResponse } from '@djig/agent-session-state/adapters/ai-sdk';
-import { useAgentSession, usePendingApprovals } from '@djig/agent-session-state/react';
+import { createSessionStore } from '@djignesh21/agent-session-state';
+import { localStorageStorage } from '@djignesh21/agent-session-state/storage/local-storage';
+import { syncUIMessages, toToolApprovalResponse } from '@djignesh21/agent-session-state/adapters/ai-sdk';
+import { useAgentSession, usePendingApprovals } from '@djignesh21/agent-session-state/react';
 
 export function Chat({ chatId }: { chatId: string }) {
   const store = useMemo(
@@ -101,9 +101,9 @@ export function Chat({ chatId }: { chatId: string }) {
 ## AG-UI quickstart: `connectAgUi` + resume
 
 ```ts
-import { createSessionStore } from '@djig/agent-session-state';
-import { indexedDbStorage } from '@djig/agent-session-state/storage/indexeddb';
-import { connectAgUi } from '@djig/agent-session-state/adapters/ag-ui';
+import { createSessionStore } from '@djignesh21/agent-session-state';
+import { indexedDbStorage } from '@djignesh21/agent-session-state/storage/indexeddb';
+import { connectAgUi } from '@djignesh21/agent-session-state/adapters/ag-ui';
 
 const store = createSessionStore({ sessionId: threadId, storage: indexedDbStorage() });
 await store.hydrate();
@@ -136,8 +136,8 @@ createSessionStore({
 
 ```ts
 // app/api/agent-sessions/[...path]/route.ts
-import { createHttpStorageHandler } from '@djig/agent-session-state/server';
-import { memoryStorage } from '@djig/agent-session-state'; // swap for your own StorageAdapter (Postgres, Redis, KV…)
+import { createHttpStorageHandler } from '@djignesh21/agent-session-state/server';
+import { memoryStorage } from '@djignesh21/agent-session-state'; // swap for your own StorageAdapter (Postgres, Redis, KV…)
 
 const handler = createHttpStorageHandler(memoryStorage(), {
   authorize: async (req, sessionId) => {
@@ -153,7 +153,7 @@ export const DELETE = handler;
 
 ```ts
 // client
-import { httpStorage } from '@djig/agent-session-state/storage/http';
+import { httpStorage } from '@djignesh21/agent-session-state/storage/http';
 const storage = httpStorage({ baseUrl: '/api/agent-sessions', headers: () => ({ authorization: `Bearer ${token}` }) });
 ```
 
@@ -177,7 +177,7 @@ Storage adapters that touch `window`/`indexedDB` are no-ops on the server (`type
 
 ## API reference
 
-### `@djig/agent-session-state` (core, zero deps)
+### `@djignesh21/agent-session-state` (core, zero deps)
 
 **`createSessionStore(options): SessionStore`**
 
@@ -246,19 +246,19 @@ const pricing = {
 }
 ```
 
-### `@djig/agent-session-state/react`
+### `@djignesh21/agent-session-state/react`
 
 `useAgentSession(store)` → `{ state, status, hydrated, resolveApproval, append, store }`; `usePendingApprovals`, `useSubagentTree` (nested roots), `useUsage`, `useToolCalls(store, filter?)`, `useMessages`, `useResumeCursor`, `useSessionStatus`, `useOutbox`, and the generic `useSessionSelector(store, selector, isEqual?)`. Every hook calls `hydrate()` once per store in an effect.
 
-### `@djig/agent-session-state/adapters/ai-sdk`
+### `@djignesh21/agent-session-state/adapters/ai-sdk`
 
 `fromUIMessages(messages, state, options?)` → `EventInput[]` diff; `syncUIMessages(store, messages, options?)` → diff + append; `toToolApprovalResponse(resolution)` → `{ id, approved, reason }` for `addToolApprovalResponse`. UIMessage types are defined structurally (no dependency on `ai`). Tool parts in `approval-requested` → `APPROVAL_REQUESTED`; `approval-responded` → `APPROVAL_RESOLVED`.
 
-### `@djig/agent-session-state/adapters/ag-ui`
+### `@djignesh21/agent-session-state/adapters/ag-ui`
 
 `parseAgUiEvent(obj)`, `createSseParser()`, `connectAgUi({ url, store, fetch?, headers?, body?, cursor?, reconnect?, resumeOnVisible?, onEvent?, onError?, signal? })` → `{ abort(), done }`.
 
-### `@djig/agent-session-state/adapters/langgraph`
+### `@djignesh21/agent-session-state/adapters/langgraph`
 
 `fromInterrupt(interrupt, { runId?, threadId? })` → `APPROVAL_REQUESTED` (understands `HumanInterrupt` `action_request`/`config`, plain `question`/`options`, or a string); `toResumeCommand(resolution)` → `{ resume }` for `submit(undefined, { command })`.
 

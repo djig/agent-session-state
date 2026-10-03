@@ -19,7 +19,7 @@ export interface HttpStorageOptions {
  *   DELETE {baseUrl}/sessions/:id                 (optional; wipes the session)
  *   GET  {baseUrl}/sessions                       -> string[] (optional)
  *
- * `createHttpStorageHandler()` from `@djig/agent-session-state/server` implements
+ * `createHttpStorageHandler()` from `@djignesh21/agent-session-state/server` implements
  * this contract on top of any StorageAdapter using Web Request/Response.
  */
 export function httpStorage(options: HttpStorageOptions): StorageAdapter {
