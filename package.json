@@ -1,0 +1,179 @@
+{
+  "name": "@djig/agent-session-state",
+  "version": "0.1.0",
+  "description": "Durable, runtime-agnostic agent session state for React: pending approvals that survive reload, resumable stream cursors, subagent trees, and token/cost accounting — one event log, any transport.",
+  "author": "Jignesh (https://djig.github.io)",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/djig/agent-session-state.git"
+  },
+  "homepage": "https://github.com/djig/agent-session-state#readme",
+  "bugs": {
+    "url": "https://github.com/djig/agent-session-state/issues"
+  },
+  "keywords": [
+    "agent",
+    "ai",
+    "ag-ui",
+    "ai-sdk",
+    "langgraph",
+    "human-in-the-loop",
+    "approval",
+    "event-sourcing",
+    "react",
+    "session",
+    "state",
+    "resumable",
+    "sse"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./react": {
+      "import": {
+        "types": "./dist/react.d.ts",
+        "default": "./dist/react.js"
+      },
+      "require": {
+        "types": "./dist/react.d.cts",
+        "default": "./dist/react.cjs"
+      }
+    },
+    "./adapters/ag-ui": {
+      "import": {
+        "types": "./dist/adapters/ag-ui.d.ts",
+        "default": "./dist/adapters/ag-ui.js"
+      },
+      "require": {
+        "types": "./dist/adapters/ag-ui.d.cts",
+        "default": "./dist/adapters/ag-ui.cjs"
+      }
+    },
+    "./adapters/ai-sdk": {
+      "import": {
+        "types": "./dist/adapters/ai-sdk.d.ts",
+        "default": "./dist/adapters/ai-sdk.js"
+      },
+      "require": {
+        "types": "./dist/adapters/ai-sdk.d.cts",
+        "default": "./dist/adapters/ai-sdk.cjs"
+      }
+    },
+    "./adapters/langgraph": {
+      "import": {
+        "types": "./dist/adapters/langgraph.d.ts",
+        "default": "./dist/adapters/langgraph.js"
+      },
+      "require": {
+        "types": "./dist/adapters/langgraph.d.cts",
+        "default": "./dist/adapters/langgraph.cjs"
+      }
+    },
+    "./storage/local-storage": {
+      "import": {
+        "types": "./dist/storage/local-storage.d.ts",
+        "default": "./dist/storage/local-storage.js"
+      },
+      "require": {
+        "types": "./dist/storage/local-storage.d.cts",
+        "default": "./dist/storage/local-storage.cjs"
+      }
+    },
+    "./storage/indexeddb": {
+      "import": {
+        "types": "./dist/storage/indexeddb.d.ts",
+        "default": "./dist/storage/indexeddb.js"
+      },
+      "require": {
+        "types": "./dist/storage/indexeddb.d.cts",
+        "default": "./dist/storage/indexeddb.cjs"
+      }
+    },
+    "./storage/http": {
+      "import": {
+        "types": "./dist/storage/http.d.ts",
+        "default": "./dist/storage/http.js"
+      },
+      "require": {
+        "types": "./dist/storage/http.d.cts",
+        "default": "./dist/storage/http.cjs"
+      }
+    },
+    "./server": {
+      "import": {
+        "types": "./dist/server.d.ts",
+        "default": "./dist/server.js"
+      },
+      "require": {
+        "types": "./dist/server.d.cts",
+        "default": "./dist/server.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "typesVersions": {
+    "*": {
+      "react": ["./dist/react.d.ts"],
+      "adapters/ag-ui": ["./dist/adapters/ag-ui.d.ts"],
+      "adapters/ai-sdk": ["./dist/adapters/ai-sdk.d.ts"],
+      "adapters/langgraph": ["./dist/adapters/langgraph.d.ts"],
+      "storage/local-storage": ["./dist/storage/local-storage.d.ts"],
+      "storage/indexeddb": ["./dist/storage/indexeddb.d.ts"],
+      "storage/http": ["./dist/storage/http.d.ts"],
+      "server": ["./dist/server.d.ts"]
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "size": "node scripts/size.mjs",
+    "check": "npm run typecheck && npm run build && npm test && npm run size",
+    "prepublishOnly": "npm run check"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@testing-library/react": "^16.3.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "fake-indexeddb": "^6.2.5",
+    "happy-dom": "^20.14.5",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tsup": "^8.5.1",
+    "typescript": "^5.6.0",
+    "vitest": "^5.0.3"
+  }
+}
